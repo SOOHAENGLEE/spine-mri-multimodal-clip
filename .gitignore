@@ -1,0 +1,23 @@
+# 1. 가상환경 및 OS 파일
+__pycache__/
+*.pyc
+.DS_Store
+.env
+venv/
+.vscode/
+
+# 2. 데이터 (절대 올리면 안 됨!)
+data/raw/
+data/processed/
+*.csv
+*.json
+
+# 3. 학습 결과 및 로그 (용량이 큼)
+results/
+logs/
+*.pt
+*.pth
+*.ckpt
+
+# 4. 기타
+wandb/
