@@ -1,4 +1,4 @@
-# 1. 가상환경 및 OS 파일
+# 1. Python & System cache
 __pycache__/
 *.pyc
 .DS_Store
@@ -6,18 +6,20 @@ __pycache__/
 venv/
 .vscode/
 
-# 2. 데이터 (절대 올리면 안 됨!)
-data/raw/
-data/processed/
+# 2. Data (개인정보 및 대용량 원본 데이터 - 절대 업로드 금지)
+data/
 *.csv
 *.json
 
-# 3. 학습 결과 및 로그 (용량이 큼)
-results/
+# 3. Logs & Checkpoints
 logs/
+wandb/
+
+# [중요] 모델 가중치 파일은 무시하되, results 폴더 구조와 이미지는 허용
 *.pt
 *.pth
 *.ckpt
+*.bin
 
-# 4. 기타
-wandb/
+# results 폴더 자체는 무시하지 않음 (안에 있는 이미지는 올라감)
+!results/

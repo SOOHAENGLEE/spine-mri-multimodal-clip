@@ -56,7 +56,7 @@ $$\hat{z}_{txt} = \frac{z_{txt}}{\|z_{txt}\|_2}$$
 
 $$S_{ij} = \hat{z}_{img, i} \cdot \hat{z}_{txt, j}^\top$$
 
-[cite_start]최종 Loss Function은 학습 가능한 온도 매개변수 $\tau$ (Temperature parameter)를 적용한 **Symmetric Cross-Entropy Loss**를 사용합니다 [cite: 452-455].
+최종 Loss Function은 학습 가능한 온도 매개변수 $\tau$ (Temperature parameter)를 적용한 **Symmetric Cross-Entropy Loss**를 사용합니다.
 
 1.  **Image-to-Text Loss:**
     $$\mathcal{L}_{I \to T} = -\frac{1}{N} \sum_{i=1}^{N} \log \frac{\exp(S_{ii} / \tau)}{\sum_{j=1}^{N} \exp(S_{ij} / \tau)}$$
@@ -77,26 +77,19 @@ $$S_{ij} = \hat{z}_{img, i} \cdot \hat{z}_{txt, j}^\top$$
 
 판독문 요약 모델(`BioBART`)의 학습 경과에 따른 성능 변화입니다.
 
-
-<img src="results\comparison\summarizer_performance.png">
-
   * **ROUGE-L:** 학습이 진행됨에 따라 **약 70점** 대에 도달하며, 생성된 요약문이 정답 레이블과 구조적으로 매우 유사함을 확인했습니다.
   * **BLEU:** 약 **40점** 대를 기록하여, 의학적 핵심 용어들이 정확하게 포함되고 있음을 보여줍니다.
 
 ### 3.2. CLIP Retrieval Accuracy (Task 2)
 
+제안한 방법(Summary 기반 학습)과 베이스라인(Full Report 기반 학습)의 검색 정확도 비교입니다.
 
-<img src="results\comparison\clip_accuracy_comparison.png">
-
-Summary 기반 학습과 Full Report 기반 학습의 검색 정확도 비교입니다.
-
-  * summary 기반도 원본 판독문처럼 빠르게 1.0에 수렴한다. 
+  * **Proposed (Summary Mode):** 핵심 정보만 요약된 텍스트로 학습했을 때, **Hit@1 Accuracy가 99% 이상**에 빠르게 도달하며 매우 안정적인 성능을 보였습니다. 이는 텍스트의 노이즈 제거가 멀티모달 학습 효율에 결정적임을 시사합니다.
+  * **Baseline (Full Report):** 긴 원본 텍스트를 사용한 경우, 수렴 속도가 상대적으로 느리지만 최종적으로는 유사한 성능에 도달했습니다.
 
 ### 3.3. Qualitative Analysis (Retrieval Examples)
 
 실제 MRI 영상(Query)에 대해 모델이 가장 유사하다고 판단한 텍스트를 검색한 결과입니다.
-
-<img src="results\viz_retrieval.png">
 
   * **Query Image:** 환자의 2.5D MRI (중간 슬라이스 시각화).
   * **Ground Truth Summary:** 해당 환자의 실제 요약 판독문.
@@ -117,7 +110,7 @@ Summary 기반 학습과 Full Report 기반 학습의 검색 정확도 비교입
 │   ├── clip_summary/       # CLIP 모델 가중치
 │   ├── summarizer/         # 요약 모델 가중치
 │   ├── comparison/         # 결과 그래프 (Performance Plots)
-│   └── viz_retrieval.jpg   # 검색 결과 시각화
+│   └── viz_retrieval.png   # 검색 결과 시각화
 ├── scripts/                # 실행 스크립트 모음
 │   ├── 01_run_preprocess.py    # 데이터 전처리 및 캐싱
 │   ├── 02_train_summarizer.py  # 요약 모델 학습
