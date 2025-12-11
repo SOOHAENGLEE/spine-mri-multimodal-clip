@@ -1,0 +1,15 @@
+# Temporary & Junk files
+pymp-*
+tmp-*
+torchelastic_*
+.accelerate_state*
+__pycache__/
+*.pyc
+
+# Data & Models (보안/용량 문제로 제외)
+data/
+logs/
+*.pt
+*.pth
+*.json
+*.csv

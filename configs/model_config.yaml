@@ -1,0 +1,38 @@
+project_name: "Spine_MRI_Multimodal"
+
+paths:
+  raw_csv: "./data/raw/data.csv"
+  image_root: "./data/raw/Datasets_multi"
+  output_dir: "./data/processed"
+  result_dir: "./results"
+
+columns:
+  study_col: "연구번호"
+  full_report_col: "판독결과문"
+  summary_label_col: "label"
+
+settings:
+  min_slice_count: 5
+  seed: 42
+
+models:
+  summarizer:
+    name: "GanjinZero/biobart-base"
+    max_input_len: 512
+    max_target_len: 128
+  
+  clip:
+    image_encoder: "convnext_base" 
+    text_encoder: "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext"
+    embed_dim: 512
+    dropout: 0.1
+
+train:
+  seed: 42
+  batch_size: 24       # GPU당 24 (Global 72) - A6000 x 3 환경 최적화
+  epochs: 50
+  lr: 3e-5
+  weight_decay: 0.01
+  num_workers: 4
+  img_size: [320, 320]
+  use_amp: true
