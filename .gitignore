@@ -1,15 +1,32 @@
-# Temporary & Junk files
-pymp-*
-tmp-*
-torchelastic_*
-.accelerate_state*
+# 1. Python & System cache
 __pycache__/
 *.pyc
+.DS_Store
+.env
+venv/
+.vscode/
 
-# Data & Models (보안/용량 문제로 제외)
+# 2. Data (개인정보 및 대용량 원본 데이터 - 절대 업로드 금지)
 data/
+*.csv
+# 모든 json 무시 (데이터 유출 방지)
+*.json
+
+# 3. Logs & Checkpoints
 logs/
+wandb/
+
+# 4. Model Weights (용량 문제로 제외)
 *.pt
 *.pth
-*.json
-*.csv
+*.ckpt
+*.bin
+
+# [중요] results 폴더 설정
+# results 폴더는 허용
+!results/
+# results 폴더 안의 history.json 파일은 예외적으로 허용 (업로드)
+!results/**/history.json
+# results 폴더 안의 이미지 파일 허용
+!results/**/*.png
+
